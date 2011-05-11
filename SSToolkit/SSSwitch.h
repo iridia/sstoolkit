@@ -17,7 +17,7 @@ typedef enum {
 	SSSwitchLabelStyleAlwaysView,	// Always use views
 } SSSwitchLabelStyle;
 
-@interface SSSwitch : UIControl {
+@interface SSSwitch : UIControl <NSCoding> {
 	
 @private
 	

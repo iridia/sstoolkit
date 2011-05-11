@@ -14,6 +14,9 @@
 - (void)_handleReleased:(id)sender;
 - (void)_handleDragged:(id)sender event:(UIEvent *)event;
 - (void)_handleDraggingEnded:(id)sender;
+
+- (void) _init;
+
 @end
 
 @implementation SSSwitch
@@ -63,58 +66,77 @@
 
 - (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
-		self.backgroundColor = [UIColor clearColor];
-		self.clipsToBounds = YES;
-		self.autoresizesSubviews = NO; // TODO: Possibly remove
-		
-		// On background
-		_onBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-		_onBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_onBackgroundImageView.clipsToBounds = YES;
-		[self addSubview:_onBackgroundImageView];
-		
-		// Off background
-		_offBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-		_offBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_offBackgroundImageView.clipsToBounds = YES;
-		[self addSubview:_offBackgroundImageView];
-		
-		// Label mask
-		_labelMaskView = [[UIView alloc] initWithFrame:CGRectZero];
-		_labelMaskView.backgroundColor = [UIColor clearColor];
-		_labelMaskView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_labelMaskView.clipsToBounds = YES;
-		[self addSubview:_labelMaskView];
-		
-		// On label
-		_onLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-		_onLabel.backgroundColor = [UIColor clearColor];
-		_onLabel.text = @"ON";
-		_onLabel.textAlignment = UITextAlignmentCenter;
-		[_labelMaskView addSubview:_onLabel];
-		
-		// Off label
-		_offLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-		_offLabel.backgroundColor = [UIColor clearColor];
-		_offLabel.text = @"OFF";
-		_offLabel.textAlignment = UITextAlignmentCenter;
-		[_labelMaskView addSubview:_offLabel];
-		
-		// Handle
-		_handle = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-		[_handle addTarget:self action:@selector(_handleReleased:) forControlEvents:UIControlEventTouchUpInside];
-		[_handle addTarget:self action:@selector(_handleDragged:event:) forControlEvents:UIControlEventTouchDragInside];
-		[_handle addTarget:self action:@selector(_handleDraggingEnded:) forControlEvents:UIControlEventTouchUpOutside];
-		[self addSubview:_handle];
-		
-		// Defaults
-		_dragging = NO;
-		_hitCount = 0;
-		_switchLabelStyle = SSSwitchLabelStyleDefault;
-		_on = NO;
-		self.style = SSSwitchStyleDefault;
+	
+		[self _init];
+	
 	}
 	return self;
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder {
+
+	self = [super initWithCoder:aDecoder];
+	if (!self) return nil;
+	
+	[self _init];
+	
+	return self;
+
+}
+
+- (void) _init {
+
+	self.backgroundColor = [UIColor clearColor];
+	self.clipsToBounds = YES;
+	self.autoresizesSubviews = NO; // TODO: Possibly remove
+	
+	// On background
+	_onBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+	_onBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_onBackgroundImageView.clipsToBounds = YES;
+	[self addSubview:_onBackgroundImageView];
+	
+	// Off background
+	_offBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+	_offBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_offBackgroundImageView.clipsToBounds = YES;
+	[self addSubview:_offBackgroundImageView];
+	
+	// Label mask
+	_labelMaskView = [[UIView alloc] initWithFrame:CGRectZero];
+	_labelMaskView.backgroundColor = [UIColor clearColor];
+	_labelMaskView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_labelMaskView.clipsToBounds = YES;
+	[self addSubview:_labelMaskView];
+	
+	// On label
+	_onLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	_onLabel.backgroundColor = [UIColor clearColor];
+	_onLabel.text = @"ON";
+	_onLabel.textAlignment = UITextAlignmentCenter;
+	[_labelMaskView addSubview:_onLabel];
+	
+	// Off label
+	_offLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	_offLabel.backgroundColor = [UIColor clearColor];
+	_offLabel.text = @"OFF";
+	_offLabel.textAlignment = UITextAlignmentCenter;
+	[_labelMaskView addSubview:_offLabel];
+	
+	// Handle
+	_handle = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+	[_handle addTarget:self action:@selector(_handleReleased:) forControlEvents:UIControlEventTouchUpInside];
+	[_handle addTarget:self action:@selector(_handleDragged:event:) forControlEvents:UIControlEventTouchDragInside];
+	[_handle addTarget:self action:@selector(_handleDraggingEnded:) forControlEvents:UIControlEventTouchUpOutside];
+	[self addSubview:_handle];
+	
+	// Defaults
+	_dragging = NO;
+	_hitCount = 0;
+	_switchLabelStyle = SSSwitchLabelStyleDefault;
+	_on = NO;
+	self.style = SSSwitchStyleDefault;
+
 }
 
 
