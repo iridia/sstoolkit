@@ -258,6 +258,35 @@
 	// TODO: These are still a bit hacky (with the +2 and -1)
 	_onLabel.frame = CGRectMake(x - labelWidth - _trackEdgeInsets.left - labelClipWidth + 2.0f, 0.0f, labelWidth, labelHeight);
 	_offLabel.frame = CGRectMake(x + _handleWidth - _trackEdgeInsets.right - labelClipWidth - 1.0f, 0.0f, labelWidth, labelHeight);
+	
+	if (_onView) {
+	
+		[_labelMaskView addSubview:_onView];
+		_onView.frame = (CGRect){
+			(CGPoint){
+				roundf(_onLabel.frame.origin.x + 0.5 * (_onLabel.frame.size.width - _onView.frame.size.width)), 
+				roundf(_onLabel.frame.origin.y + 0.5 * (_onLabel.frame.size.height - _onView.frame.size.height))
+			},
+			_onView.frame.size
+		};
+		_onLabel.hidden = YES;
+
+	}
+
+	if (_offView) {
+
+		[_labelMaskView addSubview:_offView];
+		_offView.frame = (CGRect){
+			(CGPoint){
+				roundf(_offLabel.frame.origin.x + 0.5 * (_offLabel.frame.size.width - _offView.frame.size.width)), 
+				roundf(_offLabel.frame.origin.y + 0.5 * (_offLabel.frame.size.height - _offView.frame.size.height))
+			},
+			_offView.frame.size
+		};
+		_offLabel.hidden = YES;
+		
+	}
+	
 }
 
 
