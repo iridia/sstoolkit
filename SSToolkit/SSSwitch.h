@@ -19,7 +19,7 @@ typedef enum {
 
 @interface SSSwitch : UIControl <NSCoding> {
 	
-@private
+@package
 	
 	BOOL _on;
 	SSSwitchStyle _style;
