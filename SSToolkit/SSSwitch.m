@@ -264,8 +264,8 @@
 		[_labelMaskView addSubview:_onView];
 		_onView.frame = (CGRect){
 			(CGPoint){
-				roundf(_onLabel.frame.origin.x + 0.5 * (_onLabel.frame.size.width - _onView.frame.size.width)), 
-				roundf(_onLabel.frame.origin.y + 0.5 * (_onLabel.frame.size.height - _onView.frame.size.height))
+				roundf(_onLabel.frame.origin.x + 0.5f * (_onLabel.frame.size.width - _onView.frame.size.width)), 
+				roundf(_onLabel.frame.origin.y + 0.5f * (_onLabel.frame.size.height - _onView.frame.size.height))
 			},
 			_onView.frame.size
 		};
@@ -278,8 +278,8 @@
 		[_labelMaskView addSubview:_offView];
 		_offView.frame = (CGRect){
 			(CGPoint){
-				roundf(_offLabel.frame.origin.x + 0.5 * (_offLabel.frame.size.width - _offView.frame.size.width)), 
-				roundf(_offLabel.frame.origin.y + 0.5 * (_offLabel.frame.size.height - _offView.frame.size.height))
+				roundf(_offLabel.frame.origin.x + 0.5f * (_offLabel.frame.size.width - _offView.frame.size.width)), 
+				roundf(_offLabel.frame.origin.y + 0.5f * (_offLabel.frame.size.height - _offView.frame.size.height))
 			},
 			_offView.frame.size
 		};
