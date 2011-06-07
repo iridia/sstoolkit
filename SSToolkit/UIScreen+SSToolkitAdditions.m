@@ -11,14 +11,7 @@
 @implementation UIScreen (SSToolkitAdditions)
 
 - (CGRect)currentBounds {
-	
-	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-	
-	if (UIInterfaceOrientationIsLandscape(orientation) || UIInterfaceOrientationIsPortrait(orientation))
-	return [self boundsForOrientation:(UIInterfaceOrientation)orientation];
-	
-	return [self bounds];
-	
+	return [self boundsForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
 - (CGRect)boundsForOrientation:(UIInterfaceOrientation)orientation {
@@ -37,7 +30,7 @@
 	static dispatch_once_t predicate;
 	static BOOL answer;
 
-	dispatch_once(&predicate, ^(){
+	dispatch_once(&predicate, ^{
 		answer = ([self respondsToSelector:@selector(scale)] && [self scale] == 2);
 	});
 	return answer;

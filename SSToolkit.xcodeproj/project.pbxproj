@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,12 +21,14 @@
 		B23910641357DCF700ADE21B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23910631357DCF700ADE21B /* Foundation.framework */; };
 		B23910661357DCF700ADE21B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23910651357DCF700ADE21B /* UIKit.framework */; };
 		B23910811357DDA600ADE21B /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910801357DDA600ADE21B /* GHUnitIOSTestMain.m */; };
-		B23910A91357DED300ADE21B /* DateCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A61357DED300ADE21B /* DateCategoryTest.m */; };
-		B23910AA1357DED300ADE21B /* DictionaryCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A71357DED300ADE21B /* DictionaryCategoryTest.m */; };
-		B23910AB1357DED300ADE21B /* StringCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A81357DED300ADE21B /* StringCategoryTest.m */; };
-		B23910C01357E07A00ADE21B /* ArrayCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910BF1357E07A00ADE21B /* ArrayCategoryTest.m */; };
-		B23910C21357E08600ADE21B /* DataCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910C11357E08600ADE21B /* DataCategoryTest.m */; };
-		B23910C41357E08E00ADE21B /* URLCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910C31357E08E00ADE21B /* URLCategoryTest.m */; };
+		B2453A181394AE5000275B6B /* ArrayCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910BF1357E07A00ADE21B /* ArrayCategoryTest.m */; };
+		B2453A191394AE5000275B6B /* ColorCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A5D4D5135873B300AC4BA7 /* ColorCategoryTest.m */; };
+		B2453A1A1394AE5000275B6B /* ControlCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A5D4DD1358748700AC4BA7 /* ControlCategoryTest.m */; };
+		B2453A1B1394AE5000275B6B /* DataCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910C11357E08600ADE21B /* DataCategoryTest.m */; };
+		B2453A1C1394AE5000275B6B /* DateCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A61357DED300ADE21B /* DateCategoryTest.m */; };
+		B2453A1D1394AE5000275B6B /* DictionaryCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A71357DED300ADE21B /* DictionaryCategoryTest.m */; };
+		B2453A1E1394AE5000275B6B /* StringCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910A81357DED300ADE21B /* StringCategoryTest.m */; };
+		B2453A1F1394AE5000275B6B /* URLCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B23910C31357E08E00ADE21B /* URLCategoryTest.m */; };
 		B247ABAE1300930200971EC0 /* SSSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B247ABAC1300930200971EC0 /* SSSegmentedControl.h */; };
 		B247ABAF1300930200971EC0 /* SSSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B247ABAD1300930200971EC0 /* SSSegmentedControl.m */; };
 		B24E9E43121DC29A0085F81E /* NSArray+SSToolkitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E05121DC29A0085F81E /* NSArray+SSToolkitAdditions.h */; };
@@ -41,7 +43,6 @@
 		B24E9E4C121DC29A0085F81E /* NSURL+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E9E0E121DC29A0085F81E /* NSURL+SSToolkitAdditions.m */; };
 		B24E9E4D121DC29A0085F81E /* SSCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E0F121DC29A0085F81E /* SSCategories.h */; };
 		B24E9E4E121DC29A0085F81E /* SSConcurrentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E10121DC29A0085F81E /* SSConcurrentOperation.h */; };
-		B24E9E4F121DC29A0085F81E /* SSConcurrentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E9E11121DC29A0085F81E /* SSConcurrentOperation.m */; };
 		B24E9E50121DC29A0085F81E /* SSDrawingUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E12121DC29A0085F81E /* SSDrawingUtilities.h */; };
 		B24E9E51121DC29A0085F81E /* SSGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E13121DC29A0085F81E /* SSGradientView.h */; };
 		B24E9E52121DC29A0085F81E /* SSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E9E14121DC29A0085F81E /* SSGradientView.m */; };
@@ -83,6 +84,8 @@
 		B24E9E7E121DC29A0085F81E /* UIView+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E9E40121DC29A0085F81E /* UIView+SSToolkitAdditions.m */; };
 		B24E9E7F121DC29A0085F81E /* UIViewController+SSToolkitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B24E9E41121DC29A0085F81E /* UIViewController+SSToolkitAdditions.h */; };
 		B24E9E80121DC29A0085F81E /* UIViewController+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B24E9E42121DC29A0085F81E /* UIViewController+SSToolkitAdditions.m */; };
+		B25C8E601394327000DE7BFF /* SSCollectionViewExtremityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B456FC139078B80060C279 /* SSCollectionViewExtremityTableViewCell.m */; };
+		B25C8E611394327000DE7BFF /* SSCollectionViewExtremityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B456FB139078B80060C279 /* SSCollectionViewExtremityTableViewCell.h */; };
 		B267D3451226CE0400B66519 /* SSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B267D3431226CE0400B66519 /* SSCollectionViewController.h */; };
 		B267D3461226CE0400B66519 /* SSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B267D3441226CE0400B66519 /* SSCollectionViewController.m */; };
 		B2721BA0132F136C00D762FD /* SSCollectionViewInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = B2721B9F132F136C00D762FD /* SSCollectionViewInternal.h */; };
@@ -100,12 +103,10 @@
 		B28219DE12FA8EB500BAF3C6 /* SSRatingPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B28219DC12FA8EB500BAF3C6 /* SSRatingPicker.m */; };
 		B28C6D0712FBE5C400667755 /* SSRatingPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B28C6D0512FBE5C400667755 /* SSRatingPickerViewController.h */; };
 		B28C6D0812FBE5C400667755 /* SSRatingPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28C6D0612FBE5C400667755 /* SSRatingPickerViewController.m */; };
-		B2A5D4D6135873B300AC4BA7 /* ColorCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A5D4D5135873B300AC4BA7 /* ColorCategoryTest.m */; };
-		B2A5D4DE1358748700AC4BA7 /* ControlCategoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A5D4DD1358748700AC4BA7 /* ControlCategoryTest.m */; };
 		B2AAE65C1281B73E0068EE7F /* SSNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = B2AAE65A1281B73E0068EE7F /* SSNavigationController.h */; };
 		B2AAE65D1281B73E0068EE7F /* SSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AAE65B1281B73E0068EE7F /* SSNavigationController.m */; };
-		B2ABC6921329D14300521D20 /* SSCollectionViewTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ABC6901329D14300521D20 /* SSCollectionViewTableViewCell.h */; };
-		B2ABC6931329D14300521D20 /* SSCollectionViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABC6911329D14300521D20 /* SSCollectionViewTableViewCell.m */; };
+		B2ABC6921329D14300521D20 /* SSCollectionViewItemTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ABC6901329D14300521D20 /* SSCollectionViewItemTableViewCell.h */; };
+		B2ABC6931329D14300521D20 /* SSCollectionViewItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABC6911329D14300521D20 /* SSCollectionViewItemTableViewCell.m */; };
 		B2AE1134126F963300534CF2 /* UIApplication+SSToolkitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B2AE1132126F963300534CF2 /* UIApplication+SSToolkitAdditions.h */; };
 		B2AE1135126F963300534CF2 /* UIApplication+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE1133126F963300534CF2 /* UIApplication+SSToolkitAdditions.m */; };
 		B2B3CED81296F637001BAC94 /* SSSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B3CED61296F637001BAC94 /* SSSwitch.h */; };
@@ -238,12 +239,14 @@
 		B2A5D4DD1358748700AC4BA7 /* ControlCategoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlCategoryTest.m; sourceTree = "<group>"; };
 		B2AAE65A1281B73E0068EE7F /* SSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNavigationController.h; sourceTree = "<group>"; };
 		B2AAE65B1281B73E0068EE7F /* SSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNavigationController.m; sourceTree = "<group>"; };
-		B2ABC6901329D14300521D20 /* SSCollectionViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewTableViewCell.h; sourceTree = "<group>"; };
-		B2ABC6911329D14300521D20 /* SSCollectionViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewTableViewCell.m; sourceTree = "<group>"; };
+		B2ABC6901329D14300521D20 /* SSCollectionViewItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewItemTableViewCell.h; sourceTree = "<group>"; };
+		B2ABC6911329D14300521D20 /* SSCollectionViewItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewItemTableViewCell.m; sourceTree = "<group>"; };
 		B2AE1132126F963300534CF2 /* UIApplication+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+SSToolkitAdditions.h"; sourceTree = "<group>"; };
 		B2AE1133126F963300534CF2 /* UIApplication+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+SSToolkitAdditions.m"; sourceTree = "<group>"; };
 		B2B3CED61296F637001BAC94 /* SSSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSwitch.h; sourceTree = "<group>"; };
 		B2B3CED71296F637001BAC94 /* SSSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSwitch.m; sourceTree = "<group>"; };
+		B2B456FB139078B80060C279 /* SSCollectionViewExtremityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewExtremityTableViewCell.h; sourceTree = "<group>"; };
+		B2B456FC139078B80060C279 /* SSCollectionViewExtremityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewExtremityTableViewCell.m; sourceTree = "<group>"; };
 		B2D8829213328EEF006B3F55 /* SSHUDWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSHUDWindow.h; sourceTree = "<group>"; };
 		B2D8829313328EEF006B3F55 /* SSHUDWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSHUDWindow.m; sourceTree = "<group>"; };
 		B2D883BF1332D636006B3F55 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = iphoneos3.0/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<group>"; };
@@ -527,8 +530,10 @@
 				B2E241531301C71400F7DC3B /* SSAddressBarTextFieldBackgroundViewInnerView.m */,
 				B2721B9F132F136C00D762FD /* SSCollectionViewInternal.h */,
 				B2FC71BA1330424F00D4FCCF /* SSCollectionViewItemInternal.h */,
-				B2ABC6901329D14300521D20 /* SSCollectionViewTableViewCell.h */,
-				B2ABC6911329D14300521D20 /* SSCollectionViewTableViewCell.m */,
+				B2ABC6901329D14300521D20 /* SSCollectionViewItemTableViewCell.h */,
+				B2ABC6911329D14300521D20 /* SSCollectionViewItemTableViewCell.m */,
+				B2B456FB139078B80060C279 /* SSCollectionViewExtremityTableViewCell.h */,
+				B2B456FC139078B80060C279 /* SSCollectionViewExtremityTableViewCell.m */,
 				B2D8829213328EEF006B3F55 /* SSHUDWindow.h */,
 				B2D8829313328EEF006B3F55 /* SSHUDWindow.m */,
 				B279539C12FC6C6F00FFE28D /* SSRatingPickerScrollView.h */,
@@ -602,10 +607,11 @@
 				B2E241541301C71400F7DC3B /* SSAddressBarTextField.h in Headers */,
 				B2E241561301C71400F7DC3B /* SSAddressBarTextFieldBackgroundView.h in Headers */,
 				B2E241581301C71400F7DC3B /* SSAddressBarTextFieldBackgroundViewInnerView.h in Headers */,
-				B2ABC6921329D14300521D20 /* SSCollectionViewTableViewCell.h in Headers */,
+				B2ABC6921329D14300521D20 /* SSCollectionViewItemTableViewCell.h in Headers */,
 				B2721BA0132F136C00D762FD /* SSCollectionViewInternal.h in Headers */,
 				B2FC71BB1330424F00D4FCCF /* SSCollectionViewItemInternal.h in Headers */,
 				B2D8829413328EEF006B3F55 /* SSHUDWindow.h in Headers */,
+				B25C8E611394327000DE7BFF /* SSCollectionViewExtremityTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,10 +659,11 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Sam Soffes";
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "SSToolkit" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -692,14 +699,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B23910811357DDA600ADE21B /* GHUnitIOSTestMain.m in Sources */,
-				B23910A91357DED300ADE21B /* DateCategoryTest.m in Sources */,
-				B23910AA1357DED300ADE21B /* DictionaryCategoryTest.m in Sources */,
-				B23910AB1357DED300ADE21B /* StringCategoryTest.m in Sources */,
-				B23910C01357E07A00ADE21B /* ArrayCategoryTest.m in Sources */,
-				B23910C21357E08600ADE21B /* DataCategoryTest.m in Sources */,
-				B23910C41357E08E00ADE21B /* URLCategoryTest.m in Sources */,
-				B2A5D4D6135873B300AC4BA7 /* ColorCategoryTest.m in Sources */,
-				B2A5D4DE1358748700AC4BA7 /* ControlCategoryTest.m in Sources */,
+				B2453A181394AE5000275B6B /* ArrayCategoryTest.m in Sources */,
+				B2453A191394AE5000275B6B /* ColorCategoryTest.m in Sources */,
+				B2453A1A1394AE5000275B6B /* ControlCategoryTest.m in Sources */,
+				B2453A1B1394AE5000275B6B /* DataCategoryTest.m in Sources */,
+				B2453A1C1394AE5000275B6B /* DateCategoryTest.m in Sources */,
+				B2453A1D1394AE5000275B6B /* DictionaryCategoryTest.m in Sources */,
+				B2453A1E1394AE5000275B6B /* StringCategoryTest.m in Sources */,
+				B2453A1F1394AE5000275B6B /* URLCategoryTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,7 +719,6 @@
 				B24E9E48121DC29A0085F81E /* NSDate+SSToolkitAdditions.m in Sources */,
 				B24E9E4A121DC29A0085F81E /* NSString+SSToolkitAdditions.m in Sources */,
 				B24E9E4C121DC29A0085F81E /* NSURL+SSToolkitAdditions.m in Sources */,
-				B24E9E4F121DC29A0085F81E /* SSConcurrentOperation.m in Sources */,
 				B24E9E52121DC29A0085F81E /* SSGradientView.m in Sources */,
 				B24E9E54121DC29A0085F81E /* SSHUDView.m in Sources */,
 				B24E9E56121DC29A0085F81E /* SSIndicatorLabel.m in Sources */,
@@ -752,8 +758,9 @@
 				B2E241551301C71400F7DC3B /* SSAddressBarTextField.m in Sources */,
 				B2E241571301C71400F7DC3B /* SSAddressBarTextFieldBackgroundView.m in Sources */,
 				B2E241591301C71400F7DC3B /* SSAddressBarTextFieldBackgroundViewInnerView.m in Sources */,
-				B2ABC6931329D14300521D20 /* SSCollectionViewTableViewCell.m in Sources */,
+				B2ABC6931329D14300521D20 /* SSCollectionViewItemTableViewCell.m in Sources */,
 				B2D8829513328EEF006B3F55 /* SSHUDWindow.m in Sources */,
+				B25C8E601394327000DE7BFF /* SSCollectionViewExtremityTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,7 +783,6 @@
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/SSToolkit.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -850,11 +856,11 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PREBINDING = NO;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -863,11 +869,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PREBINDING = NO;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -885,9 +891,11 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SSToolkitTests_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				INFOPLIST_FILE = "Tests/SSToolkitTests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -896,7 +904,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = SSToolkitTests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -914,12 +921,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SSToolkitTests_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				INFOPLIST_FILE = "Tests/SSToolkitTests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -928,7 +936,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = SSToolkitTests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

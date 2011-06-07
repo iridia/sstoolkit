@@ -7,10 +7,10 @@
 //
 
 #import "SCPieProgressViewDemoViewController.h"
-#import <SSToolkit/SSToolkit.h>
 
 @implementation SCPieProgressViewDemoViewController
 
+#pragma mark -
 #pragma mark Class Methods
 
 + (NSString *)title {
@@ -18,6 +18,7 @@
 }
 
 
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -28,6 +29,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
@@ -87,6 +89,7 @@
 }
 
 
+#pragma mark -
 #pragma mark Timer
 
 - (void)incrementProgress:(NSTimer *)timer {

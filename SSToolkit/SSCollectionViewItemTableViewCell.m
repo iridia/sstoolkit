@@ -1,23 +1,46 @@
 //
-//  SSCollectionViewTableViewCell.m
+//  SSCollectionViewItemTableViewCell.m
 //  SSToolkit
 //
 //  Created by Sam Soffes on 3/10/11.
 //  Copyright 2011 Sam Soffes. All rights reserved.
 //
 
-#import "SSCollectionViewTableViewCell.h"
+#import "SSCollectionViewItemTableViewCell.h"
 #import "SSCollectionViewItem.h"
 #import "SSCollectionView.h"
 #import "SSCollectionViewInternal.h"
 
-@implementation SSCollectionViewTableViewCell
+@implementation SSCollectionViewItemTableViewCell
+
+#pragma mark -
+#pragma mark Accessors
 
 @synthesize itemSize = _itemSize;
 @synthesize itemSpacing = _itemSpacing;
+
 @synthesize items = _items;
+
+- (void)setItems:(NSArray *)someItems {
+	[_items makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	[_items release];
+	_items = [someItems retain];
+	
+	if (_items == nil) {
+		return;
+	}
+	
+	for (SSCollectionViewItem *item in _items) {
+		[self addSubview:item];
+	}
+	
+	[self setNeedsLayout];
+}
+
 @synthesize collectionView = _collectionView;
 
+
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -27,6 +50,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIView
 
 - (void)layoutSubviews {
@@ -39,6 +63,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UITableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -65,30 +90,12 @@
 }
 
 
+#pragma mark -
 #pragma mark Initializer
 
 - (id)initWithReuseIdentifier:(NSString *)aReuseIdentifier {
 	self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:aReuseIdentifier];
 	return self;
-}
-
-
-#pragma mark Setters
-
-- (void)setItems:(NSArray *)items {
-	[_items makeObjectsPerformSelector:@selector(removeFromSuperview)];
-	[_items release];
-	_items = [items retain];
-	
-	if (_items == nil) {
-		return;
-	}
-	
-	for (SSCollectionViewItem *item in _items) {
-		[self addSubview:item];
-	}
-	
-	[self setNeedsLayout];
 }
 
 @end

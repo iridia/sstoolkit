@@ -10,6 +10,7 @@
 
 @implementation SCAddressBarDemoViewController
 
+#pragma mark -
 #pragma mark Class Methods
 
 + (NSString *)title {
@@ -17,6 +18,7 @@
 }
 
 
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -29,6 +31,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
@@ -36,14 +39,16 @@
 	self.title = [[self class] title];
 	self.view.backgroundColor = [UIColor colorWithRed:0.851f green:0.859f blue:0.882f alpha:1.0f];
 	
-	_headerView = [[SSGradientView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 58.0f)];
+	CGSize size = self.view.frame.size;
+	
+	_headerView = [[SSGradientView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, 58.0f)];
+	_headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	_headerView.topColor = [UIColor colorWithWhite:0.957f alpha:1.0f];
 	_headerView.bottomColor = [UIColor colorWithWhite:0.827f alpha:1.0f];
 	_headerView.bottomBorderColor = [UIColor colorWithWhite:0.369f alpha:1.0f];
-	_headerView.hasTopBorder = NO;
-	_headerView.hasBottomBorder = YES;
 	
-	_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 21.0f)];
+	_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, size.width - 20.0f, 21.0f)];
+	_titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	_titleLabel.backgroundColor = [UIColor clearColor];
 	_titleLabel.textColor = [UIColor colorWithWhite:0.404f alpha:1.0f];
 	_titleLabel.textAlignment = UITextAlignmentCenter;
@@ -52,13 +57,15 @@
 	_titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 	[_headerView addSubview:_titleLabel];
 	
-	_addressBar = [[SSAddressBarTextField alloc] initWithFrame:CGRectMake(10.0f, 21.0f, 300.0f, 31.0f)];
+	_addressBar = [[SSAddressBarTextField alloc] initWithFrame:CGRectMake(10.0f, 21.0f, size.width - 20.0f, 31.0f)];
+	_addressBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	_addressBar.delegate = self;
 	[_headerView addSubview:_addressBar];
 	
 	[self.view addSubview:_headerView];
 	
-	_webView = [[SSWebView alloc] initWithFrame:CGRectMake(0.0f, 58.0f, 320.0f, self.view.frame.size.height - 58.0f)];
+	_webView = [[SSWebView alloc] initWithFrame:CGRectMake(0.0f, 58.0f, size.width, size.height - 58.0f)];
+	_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	_webView.scalesPageToFit = YES;
 	_webView.delegate = self;
 	[self.view addSubview:_webView];
@@ -70,6 +77,15 @@
 }
 
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
+	}
+	return YES;
+}
+
+
+#pragma mark -
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -100,6 +116,7 @@
 }
 
 
+#pragma mark -
 #pragma mark SSWebViewDelegate
 
 - (void)webViewDidStartLoadingPage:(SSWebView *)aWebView {

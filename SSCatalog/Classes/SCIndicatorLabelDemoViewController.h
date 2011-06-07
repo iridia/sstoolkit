@@ -6,10 +6,10 @@
 //  Copyright 2010 Sam Soffes. All rights reserved.
 //
 
-@class SSIndicatorLabel;
-
 @interface SCIndicatorLabelDemoViewController : UIViewController {
 
+@private
+	
 	SSIndicatorLabel *_indicatorLabel;
 }
 

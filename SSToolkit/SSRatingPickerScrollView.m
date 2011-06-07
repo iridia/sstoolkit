@@ -15,10 +15,14 @@
 
 @implementation SSRatingPickerScrollView
 
+#pragma mark -
+#pragma mark Accessors
+
 @synthesize ratingPicker = _ratingPicker;
 @synthesize titleTextField = _titleTextField;
 @synthesize reviewTextField = _reviewTextField;
 
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -32,6 +36,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIView
 
 - (id)initWithFrame:(CGRect)frame {
@@ -52,9 +57,6 @@
 		_gradientView.topColor = topColor;
 		_gradientView.bottomColor = [UIColor colorWithRed:0.961f green:0.965f blue:0.973f alpha:1.0f];
 		_gradientView.bottomBorderColor = lineColor;
-		_gradientView.hasTopBorder = NO;
-		_gradientView.hasBottomBorder = YES;
-		_gradientView.showsInsets = NO;	
 		[self addSubview:_gradientView];
 		
 		_ratingPicker = [[SSRatingPicker alloc] initWithFrame:CGRectZero];
@@ -104,14 +106,7 @@
 }
 
 
-#pragma mark UIScrollView
-
-//- (void)setContentSize:(CGSize)size {
-//	[super setContentSize:size];
-//	[self setNeedsDisplay];
-//}
-
-
+#pragma mark -
 #pragma mark UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {

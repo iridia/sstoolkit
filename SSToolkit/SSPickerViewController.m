@@ -10,10 +10,15 @@
 
 @implementation SSPickerViewController
 
+#pragma mark -
+#pragma mark Accessors
+
 @synthesize selectedKey = _selectedKey;
 @synthesize keys = _keys;
 @synthesize currentIndexPath = _currentIndexPath;
 
+
+#pragma mark -
 #pragma mark NSObject
 
 - (id)init {
@@ -30,6 +35,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController Methods
 
 - (void)viewDidLoad {
@@ -38,13 +44,14 @@
 	[self loadKeys];
 	
 	if(self.selectedKey != nil) {
-		self.currentIndexPath = [[NSIndexPath indexPathForRow:[self.keys indexOfObject:self.selectedKey] inSection:0] retain];
+		self.currentIndexPath = [NSIndexPath indexPathForRow:[self.keys indexOfObject:self.selectedKey] inSection:0];
 		[self.tableView reloadData];
 		[self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 	}
 }
 
 
+#pragma mark -
 #pragma mark SSPickerViewController
 
 // This method should be overridden by a subclass
@@ -55,11 +62,12 @@
 
 
 // This method should be overridden by a subclass
-- (NSString *)cellTextForKey:(NSString *)key {
+- (NSString *)cellTextForKey:(id)key {
 	return key;
 }
 
 
+#pragma mark -
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,6 +77,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -89,7 +98,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
     }
-	NSString *key = [self.keys objectAtIndex:indexPath.row];
+	id key = [self.keys objectAtIndex:indexPath.row];
 	cell.textLabel.text = [self cellTextForKey:key];
 	if([key isEqual:self.selectedKey] == YES) {
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
