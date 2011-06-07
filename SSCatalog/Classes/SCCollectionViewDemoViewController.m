@@ -8,10 +8,10 @@
 
 #import "SCCollectionViewDemoViewController.h"
 #import "SCImageCollectionViewItem.h"
-#import "EGOImageView.h"
 
 @implementation SCCollectionViewDemoViewController
 
+#pragma mark -
 #pragma mark Class Methods
 
 + (NSString *)title {
@@ -19,16 +19,14 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.title = [[self class] title];
-	self.collectionView.minimumColumnSpacing = 20.0f;
 	
-	UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"999" style:UIBarButtonItemStyleBordered target:self action:@selector(goTo999:)];
-	self.navigationItem.rightBarButtonItem = rightButton;
-	[rightButton release];
+	self.collectionView.extremitiesStyle = SSCollectionViewExtremitiesStyleScrolling;
 }
 
 
@@ -40,18 +38,16 @@
 }
 
 
-#pragma mark Actions
+#pragma mark -
+#pragma mark SSCollectionViewDataSource
 
-- (void)goTo999:(id)sender {
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:999 inSection:0];
-	[self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:SSCollectionViewScrollPositionTop animated:YES];
+- (NSUInteger)numberOfSectionsInCollectionView:(SSCollectionView *)aCollectionView {
+	return 10;
 }
 
 
-#pragma mark SSCollectionViewDataSource
-
-- (NSInteger)collectionView:(SSCollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)section {
-	return 1024;
+- (NSUInteger)collectionView:(SSCollectionView *)aCollectionView numberOfItemsInSection:(NSUInteger)section {
+	return 50;
 }
 
 
@@ -60,32 +56,49 @@
 	
 	SCImageCollectionViewItem *item = (SCImageCollectionViewItem *)[aCollectionView dequeueReusableItemWithIdentifier:itemIdentifier];
 	if (item == nil) {
-		item = [[[SCImageCollectionViewItem alloc] initWithStyle:SSCollectionViewItemStyleDefault reuseIdentifier:itemIdentifier] autorelease];
-		
-		// Customize item for demo
-		item.textLabel.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-		item.textLabel.frame = CGRectMake(0.0f, 0.0f, 80.0f, 80.0f);
+		item = [[[SCImageCollectionViewItem alloc] initWithReuseIdentifier:itemIdentifier] autorelease];
 	}
 	
 	CGFloat size = 80.0f * [[UIScreen mainScreen] scale];
-	NSString *urlString = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%i?s=%0.f&d=identicon", indexPath.row, size];
-	item.remoteImageView.imageURL = [NSURL URLWithString:urlString];
+	NSInteger i = (50 * indexPath.section) + indexPath.row;
+	item.imageURL = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%i?s=%0.f&d=identicon", i, size];
 	
 	return item;
 }
 
 
+- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForHeaderInSection:(NSUInteger)section {
+	SSLabel *header = [[SSLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 40.0f)];
+	header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	header.text = [NSString stringWithFormat:@"Section %i", section + 1];
+	header.textEdgeInsets = UIEdgeInsetsMake(0.0f, 19.0f, 0.0f, 19.0f);
+	header.shadowColor = [UIColor whiteColor];
+	header.shadowOffset = CGSizeMake(0.0f, 1.0f);
+	header.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
+	return [header autorelease];
+}
+
+
+#pragma mark -
 #pragma mark SSCollectionViewDelegate
 
-- (CGSize)collectionView:(SSCollectionView *)aCollectionView itemSizeForSection:(NSInteger)section {
+- (CGSize)collectionView:(SSCollectionView *)aCollectionView itemSizeForSection:(NSUInteger)section {
 	return CGSizeMake(80.0f, 80.0f);
 }
 
 
 - (void)collectionView:(SSCollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"\nYou selected item #%i!\n\n", indexPath.row] message:nil delegate:nil cancelButtonTitle:@"Oh, awesome!" otherButtonTitles:nil];
+	NSString *title = [NSString stringWithFormat:@"You selected item %i in section %i!",
+					   indexPath.row + 1, indexPath.section + 1];
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:nil
+										  cancelButtonTitle:@"Oh, awesome!" otherButtonTitles:nil];
 	[alert show];
 	[alert release];
+}
+
+
+- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForHeaderInSection:(NSUInteger)section {
+	return 40.0f;
 }
 
 @end

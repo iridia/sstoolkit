@@ -18,6 +18,9 @@
 
 @implementation SSGradientView
 
+#pragma mark -
+#pragma mark Accessors
+
 @synthesize topColor = _topColor;
 @synthesize bottomColor = _bottomColor;
 @synthesize topBorderColor = _topBorderColor;
@@ -25,47 +28,9 @@
 @synthesize topInsetAlpha = _topInsetAlpha;
 @synthesize bottomInsetAlpha = _bottomInsetAlpha;
 @synthesize gradientScale = _gradientScale;
-@synthesize hasTopBorder = _hasTopBorder;
-@synthesize hasBottomBorder = _hasBottomBorder;
-@synthesize showsInsets = _showsInsets;
-
-#pragma mark Class Methods
-
-+ (UIColor *)defaultTopColor {
-	return [UIColor colorWithRed:0.676f green:0.722f blue:0.765f alpha:1.0f];
-}
 
 
-+ (UIColor *)defaultBottomColor {
-	return [UIColor colorWithRed:0.514f green:0.568f blue:0.617f alpha:1.0f];
-}
-
-
-+ (UIColor *)defaultTopBorderColor {
-	return [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
-}
-
-
-+ (UIColor *)defaultBottomBorderColor {
-	return [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
-}
-
-
-+ (CGFloat)defaultTopInsetAlpha {
-	return 0.3f;
-}
-
-
-+ (CGFloat)defaultBottomInsetAlpha {
-	return 0.0f;
-}
-
-
-+ (CGFloat)defaultGradientScale {
-	return 1.0f;
-}
-
-
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -77,6 +42,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIView
 
 - (id)initWithFrame:(CGRect)frame {
@@ -84,16 +50,9 @@
 		self.opaque = YES;
 		
 		// Defaults
-		self.topColor = [SSGradientView defaultTopColor];
-		self.bottomColor = [SSGradientView defaultBottomColor];
-		self.topBorderColor = [SSGradientView defaultTopBorderColor];
-		self.bottomBorderColor = [SSGradientView defaultBottomBorderColor];
-		self.topInsetAlpha = [SSGradientView defaultTopInsetAlpha];
-		self.bottomInsetAlpha = [SSGradientView defaultBottomInsetAlpha];
-		self.gradientScale = [SSGradientView defaultGradientScale];
-		self.hasTopBorder = YES;
-		self.hasBottomBorder = YES;
-		self.showsInsets = YES;
+		self.gradientScale = 1.0f;
+		self.topInsetAlpha = 0.0f;
+		self.bottomInsetAlpha = 0.0f;
 		
 		_gradient = nil;		
 	}
@@ -106,40 +65,42 @@
 	CGContextClipToRect(context, rect);
 	
 	// Gradient
-	CGPoint start = CGPointMake(0.0f, 0.0f);
-	CGPoint end = CGPointMake(0.0f, rect.size.height);
-	CGContextDrawLinearGradient(context, _gradient, start, end, 0);
+	if (_gradient) {
+		CGPoint start = CGPointMake(0.0f, 0.0f);
+		CGPoint end = CGPointMake(0.0f, rect.size.height);
+		CGContextDrawLinearGradient(context, _gradient, start, end, 0);
+	}
 	
-	CGContextSetLineWidth(context, 2.0f);
+	CGContextSetLineWidth(context, 1.0f);
 	
-	if (_hasTopBorder) {
+	if (_topBorderColor) {
 		// Top inset
-		if (_showsInsets && _topInsetAlpha > 0.0f) {
+		if (_topInsetAlpha > 0.0f) {
 			CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.0f alpha:_topInsetAlpha].CGColor);
-			CGContextMoveToPoint(context, 0.0f, 1.0f);
+			CGContextMoveToPoint(context, 0.0f, 1.5f);
 			CGContextAddLineToPoint(context, rect.size.width, 1.0f);
 			CGContextStrokePath(context);
 		}
 		
 		// Top border
 		CGContextSetStrokeColorWithColor(context, _topBorderColor.CGColor);
-		CGContextMoveToPoint(context, 0.0f, 0.0f);
+		CGContextMoveToPoint(context, 0.0f, 0.5f);
 		CGContextAddLineToPoint(context, rect.size.width, 0.0f);
 		CGContextStrokePath(context);
 	}
 	
-	if (_hasBottomBorder) {
+	if (_bottomBorderColor) {
 		// Bottom inset
-		if (_showsInsets && _bottomInsetAlpha > 0.0f) {
+		if (_bottomInsetAlpha > 0.0f) {
 			CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.0f alpha:_bottomInsetAlpha].CGColor);
-			CGContextMoveToPoint(context, 0.0f, rect.size.height - 1.0f);
+			CGContextMoveToPoint(context, 0.0f, rect.size.height - 1.5f);
 			CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 1.0f);
 			CGContextStrokePath(context);
 		}
 		
 		// Bottom border
 		CGContextSetStrokeColorWithColor(context, _bottomBorderColor.CGColor);
-		CGContextMoveToPoint(context, 0.0f, rect.size.height);
+		CGContextMoveToPoint(context, 0.0f, rect.size.height - 0.5f);
 		CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
 		CGContextStrokePath(context);
 	}
@@ -182,20 +143,27 @@
 }
 
 
+#pragma mark -
 #pragma mark Gradient Methods
 
 - (void)_refreshGradient {
 	CGGradientRelease(_gradient);
+	_gradient = nil;
 	
-	// Calculate locations based on scale
-	CGFloat top = (1.0f - _gradientScale) / 2.0f;
-	_gradient = SSGradientWithColorsAndLocations(_topColor, _bottomColor, top, top + _gradientScale);
+	if (_topColor && _bottomColor) {
+		// Calculate locations based on scale
+		CGFloat top = (1.0f - _gradientScale) / 2.0f;
+		
+		// Create gradient
+		_gradient = SSGradientWithColorsAndLocations(_topColor, _bottomColor, top, top + _gradientScale);
+	}
 	
 	// Redraw
 	[self setNeedsDisplay];	
 }
 
 
+#pragma mark -
 #pragma mark NSKeyValueObserving
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

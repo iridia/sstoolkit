@@ -15,6 +15,11 @@ typedef enum {
 	SSCollectionViewScrollPositionBottom = UITableViewScrollPositionBottom
 } SSCollectionViewScrollPosition;
 
+typedef enum {
+	SSCollectionViewExtremitiesStyleFixed = UITableViewStylePlain,
+	SSCollectionViewExtremitiesStyleScrolling = UITableViewStyleGrouped
+} SSCollectionViewExtremitiesStyle;
+
 @protocol SSCollectionViewDelegate;
 @protocol SSCollectionViewDataSource;
 
@@ -37,12 +42,13 @@ typedef enum {
 	id<SSCollectionViewDelegate> _delegate;
 	id<SSCollectionViewDataSource> _dataSource;
 	
+	SSCollectionViewExtremitiesStyle _extremitiesStyle;
 	CGFloat _minimumColumnSpacing;
 	CGFloat _rowSpacing;
 	BOOL _allowsSelection;
 	NSMutableSet *_visibleItems;
-	NSMutableDictionary *_reuseableItems;
-	NSMutableDictionary *_sectionCache;
+	NSCache *_reuseableItems;
+	NSCache *_sectionCache;
 	
 	UITableView *_tableView;
 }
@@ -56,6 +62,17 @@ typedef enum {
  @brief The object that acts as the delegate of the receiving collection view.
  */
 @property (nonatomic, assign) id<SSCollectionViewDelegate> delegate;
+
+/**
+ @brief The style of the receiving collection view's headers and footers.
+ 
+ Setting to <code>SSCollectionViewExtremitiesStyleFixed</code> will cause the headers and footer to behave like a
+ <code>UITableView</code> with its style set to <code>UITableViewStylePlain</code>. Setting to
+ <code>SSCollectionViewExtremitiesStyleScrolling</code> will cause the headers and footer to behave like a
+ <code>UITableView</code> with its style set to <code>UITableViewStyleGrouped</code>. The default is
+ <code>SSCollectionViewExtremitiesStyleFixed</code>.
+ */
+@property (nonatomic, assign) SSCollectionViewExtremitiesStyle extremitiesStyle;
 
 /**
  @brief The minimum column spacing.
@@ -94,7 +111,7 @@ typedef enum {
  
  <code>SSCollectionView</code> gets the value returned by this method from its data source and caches it.
  */
-@property (nonatomic, assign, readonly) NSInteger numberOfSections;
+@property (nonatomic, assign, readonly) NSUInteger numberOfSections;
 
 /**
  @brief Reloads the items and sections of the receiver.
@@ -106,8 +123,8 @@ typedef enum {
  
  @param identifier A string identifying the cell object to be reused.
  
- @return A <code>SSCollectionViewItem</code< object with the associated identifier or nil if no such object exists in the
- reusable-item queue.
+ @return A <code>SSCollectionViewItem</code< object with the associated identifier or nil if no such object exists in
+ the reusable-item queue.
  */
 - (SSCollectionViewItem *)dequeueReusableItemWithIdentifier:(NSString *)identifier;
 
@@ -182,7 +199,7 @@ typedef enum {
  
  @return The number of items in the section.
  */
-- (NSInteger)numberOfItemsInSection:(NSInteger)section;
+- (NSUInteger)numberOfItemsInSection:(NSUInteger)section;
 
 /**
  @brief Returns the drawing area for a specified section of the receiver.
@@ -191,7 +208,7 @@ typedef enum {
  
  @return A rectangle defining the area in which the collection view draws the section.
  */
-- (CGRect)rectForSection:(NSInteger)section;
+- (CGRect)rectForSection:(NSUInteger)section;
 
 /**
  @brief Returns the drawing area for the header of the specified section.
@@ -200,7 +217,7 @@ typedef enum {
  
  @return A rectangle defining the area in which the collection view draws the section header.
  */
-- (CGRect)rectForHeaderInSection:(NSInteger)section;
+- (CGRect)rectForHeaderInSection:(NSUInteger)section;
 
 /**
  @brief Returns the drawing area for the footer of the specified section.
@@ -209,7 +226,7 @@ typedef enum {
  
  @return A rectangle defining the area in which the collection view draws the section footer.
  */
-- (CGRect)rectForFooterInSection:(NSInteger)section;
+- (CGRect)rectForFooterInSection:(NSUInteger)section;
 
 @end
 
@@ -218,12 +235,12 @@ typedef enum {
 
 @required
 
-- (NSInteger)collectionView:(SSCollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)section;
+- (NSUInteger)collectionView:(SSCollectionView *)aCollectionView numberOfItemsInSection:(NSUInteger)section;
 - (SSCollectionViewItem *)collectionView:(SSCollectionView *)aCollectionView itemForIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 
-- (NSInteger)numberOfSectionsInCollectionView:(SSCollectionView *)aCollectionView;
+- (NSUInteger)numberOfSectionsInCollectionView:(SSCollectionView *)aCollectionView;
 
 @end
 
@@ -232,14 +249,14 @@ typedef enum {
 
 @required
 
-- (CGSize)collectionView:(SSCollectionView *)aCollectionView itemSizeForSection:(NSInteger)section;
+- (CGSize)collectionView:(SSCollectionView *)aCollectionView itemSizeForSection:(NSUInteger)section;
 
 @optional
 
-- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForHeaderInSection:(NSInteger)section;
-- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForHeaderInSection:(NSInteger)section;
-- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForFooterInSection:(NSInteger)section;
-- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForFooterInSection:(NSInteger)section;
+- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForHeaderInSection:(NSUInteger)section;
+- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForHeaderInSection:(NSUInteger)section;
+- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForFooterInSection:(NSUInteger)section;
+- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForFooterInSection:(NSUInteger)section;
 - (void)collectionView:(SSCollectionView *)aCollectionView willSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)collectionView:(SSCollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)collectionView:(SSCollectionView *)aCollectionView willDeselectItemAtIndexPath:(NSIndexPath *)indexPath;

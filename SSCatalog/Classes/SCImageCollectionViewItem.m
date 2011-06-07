@@ -7,34 +7,37 @@
 //
 
 #import "SCImageCollectionViewItem.h"
-#import "EGOImageView.h"
-#import <SSToolkit/SSDrawingUtilities.h>
 
 @implementation SCImageCollectionViewItem
 
-@synthesize remoteImageView = _remoteImageView;
+#pragma mark -
+#pragma mark Accessors
 
+@synthesize imageURL = _imageURL;
+
+- (void)setImageURL:(NSString *)url {
+	[_imageURL release];
+	_imageURL = [url retain];
+	
+	self.imageView.image = [[JMImageCache sharedCache] imageForURL:_imageURL delegate:self];
+}
+
+
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
-	[_remoteImageView release];
+	[_imageURL release];
 	[super dealloc];
 }
 
 
-#pragma mark UIView
+#pragma mark -
+#pragma mark Initializer
 
-- (void)layoutSubviews {
-	_remoteImageView.frame = CGRectSetZeroOrigin(self.frame);
-}
-
-
-#pragma mark SSCollectionViewItem
-
-- (id)initWithStyle:(SSCollectionViewItemStyle)style reuseIdentifier:(NSString *)aReuseIdentifier {
-	if ((self = [super initWithStyle:style reuseIdentifier:aReuseIdentifier])) {
-		_remoteImageView = [[EGOImageView alloc] initWithFrame:CGRectZero];
-		[self addSubview:_remoteImageView];
+- (id)initWithReuseIdentifier:(NSString *)aReuseIdentifier {
+	if ((self = [super initWithStyle:SSCollectionViewItemStyleImage reuseIdentifier:aReuseIdentifier])) {
+		self.imageView.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
 	}
 	return self;
 }
@@ -42,8 +45,18 @@
 
 - (void)prepareForReuse {
 	[super prepareForReuse];
-	[_remoteImageView cancelImageLoad];
-	_remoteImageView.imageURL = nil;
+	self.imageURL = nil;
+}
+
+
+#pragma mark -
+#pragma mark JMImageCacheDelegate
+
+- (void)cache:(JMImageCache *)cache didDownloadImage:(UIImage *)image forURL:(NSString *)url {
+	if ([url isEqualToString:_imageURL]) {
+		self.imageView.image = image;
+		[self setNeedsDisplay];
+	}
 }
 
 @end

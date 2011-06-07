@@ -7,10 +7,10 @@
 //
 
 #import "SCLineViewDemoViewController.h"
-#import <SSToolkit/SSToolkit.h>
 
 @implementation SCLineViewDemoViewController
 
+#pragma mark -
 #pragma mark Class Methods
 
 + (NSString *)title {
@@ -18,6 +18,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {

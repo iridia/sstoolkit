@@ -6,15 +6,17 @@
 //  Copyright 2011 Sam Soffes. All rights reserved.
 //
 
-#import <SSToolkit/SSCollectionViewItem.h>
+#import "JMImageCache.h"
 
-@class EGOImageView;
+@interface SCImageCollectionViewItem : SSCollectionViewItem <JMImageCacheDelegate> {
 
-@interface SCImageCollectionViewItem : SSCollectionViewItem {
-
-	EGOImageView *_remoteImageView;
+@private
+	
+	NSString *_imageURL;
 }
 
-@property (nonatomic, retain, readonly) EGOImageView *remoteImageView;
+@property (nonatomic, retain) NSString *imageURL;
+
+- (id)initWithReuseIdentifier:(NSString *)aReuseIdentifier;
 
 @end

@@ -1,16 +1,17 @@
 //
-//  SSSegmentedControlDemoViewController.m
+//  SCSegmentedControlDemoViewController.m
 //  SSCatalog
 //
 //  Created by Sam Soffes on 2/14/11.
 //  Copyright 2011 Sam Soffes. All rights reserved.
 //
 
-#import "SSSegmentedControlDemoViewController.h"
+#import "SCSegmentedControlDemoViewController.h"
 #import <SSToolkit/SSSegmentedControl.h>
 
-@implementation SSSegmentedControlDemoViewController
+@implementation SCSegmentedControlDemoViewController
 
+#pragma mark -
 #pragma mark Class Methods
 
 + (NSString *)title {
@@ -18,6 +19,7 @@
 }
 
 
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -27,6 +29,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
@@ -82,6 +85,7 @@
 }
 
 
+#pragma mark -
 #pragma mark Actions
 
 - (void)valueChanged:(id)sender {

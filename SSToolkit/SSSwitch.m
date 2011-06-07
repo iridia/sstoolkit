@@ -21,7 +21,16 @@
 
 @implementation SSSwitch
 
+#pragma mark -
+#pragma mark Accessors
+
 @synthesize on = _on;
+
+- (void)setOn:(BOOL)on {
+	[self setOn:on animated:NO];
+}
+
+
 @synthesize style = _style;
 @synthesize handle = _handle;
 @synthesize leftHandleImage = _leftHandleImage;
@@ -41,6 +50,8 @@
 @synthesize trackEdgeInsets = _trackEdgeInsets;
 @synthesize switchLabelStyle = _switchLabelStyle;
 
+
+#pragma mark -
 #pragma mark NSObject
 
 - (void)dealloc {
@@ -62,6 +73,7 @@
 }
 
 
+#pragma mark -
 #pragma mark UIView
 
 - (id)initWithFrame:(CGRect)frame {
@@ -177,12 +189,8 @@
 }
 
 
+#pragma mark -
 #pragma mark Switch
-
-- (void)setOn:(BOOL)on {
-	[self setOn:on animated:NO];
-}
-
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
 	_on = on;
@@ -214,6 +222,7 @@
 }
 
 
+#pragma mark -
 #pragma mark Private Methods
 
 - (void)_layoutSubviewsWithHandlePosition:(CGFloat)x {	
@@ -326,6 +335,7 @@
 }
 
 
+#pragma mark -
 #pragma mark Setters
 
 - (void)setStyle:(SSSwitchStyle)s {
@@ -375,7 +385,7 @@
 }
 
 
-
+#pragma mark -
 #pragma mark NSKeyValueObserving
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
