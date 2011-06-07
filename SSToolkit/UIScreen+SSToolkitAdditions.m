@@ -11,9 +11,15 @@
 @implementation UIScreen (SSToolkitAdditions)
 
 - (CGRect)currentBounds {
-	return [self boundsForOrientation:[[UIDevice currentDevice] orientation]];
+	
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	
+	if (UIInterfaceOrientationIsLandscape(orientation) || UIInterfaceOrientationIsPortrait(orientation))
+	return [self boundsForOrientation:(UIInterfaceOrientation)orientation];
+	
+	return [self bounds];
+	
 }
-
 
 - (CGRect)boundsForOrientation:(UIInterfaceOrientation)orientation {
 	CGRect bounds = [self bounds];
