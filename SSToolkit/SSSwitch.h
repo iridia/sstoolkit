@@ -6,6 +6,9 @@
 //  Copyright 2010-2011 Sam Soffes. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 typedef enum {
 	SSSwitchStyleDefault,
 	SSSwitchStyleAirplane

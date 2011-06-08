@@ -106,12 +106,16 @@
 	_onBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	_onBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_onBackgroundImageView.clipsToBounds = YES;
+	_onBackgroundImageView.layer.mask = [CALayer layer];
+	_onBackgroundImageView.layer.mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
 	[self addSubview:_onBackgroundImageView];
 	
 	// Off background
 	_offBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	_offBackgroundImageView.autoresizesSubviews = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_offBackgroundImageView.clipsToBounds = YES;
+	_offBackgroundImageView.layer.mask = [CALayer layer];
+	_offBackgroundImageView.layer.mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
 	[self addSubview:_offBackgroundImageView];
 	
 	// Label mask
@@ -202,7 +206,12 @@
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 	}
 	
+	[CATransaction begin];
+	[CATransaction setDisableActions:!animated];
+	
 	[self _layoutSubviewsWithHandlePosition:(_on ? self.frame.size.width - _handleWidth : 0.0f)];
+	
+	[CATransaction commit];
 	
 	if (animated) {
 		[UIView commitAnimations];
@@ -226,12 +235,15 @@
 #pragma mark Private Methods
 
 - (void)_layoutSubviewsWithHandlePosition:(CGFloat)x {	
+	
 	CGFloat width = self.frame.size.width;
 	CGFloat height = self.frame.size.height;
 	CGFloat sideWidth = width - _handleWidth;
 	CGFloat labelWidth = sideWidth - _trackEdgeInsets.left - _trackEdgeInsets.right;
 	CGFloat labelHeight = height - _trackEdgeInsets.top - _trackEdgeInsets.bottom;
-	CGFloat labelClipWidth = 3.0f;
+	CGFloat labelClipWidth = 0.0f;
+	CGFloat leftCapWidth = _leftHandleImage.leftCapWidth;
+	CGFloat clippingPoint = x + _trackEdgeInsets.left + leftCapWidth;
 	NSUInteger position = 1;
 	
 	_labelMaskView.frame = UIEdgeInsetsInsetRect(CGRectMake(labelClipWidth, 0.0f, width - labelClipWidth * 2.0f, height), _trackEdgeInsets);
@@ -258,19 +270,26 @@
 		[_handle setBackgroundImage:_centerHandleImageHighlighted forState:UIControlStateHighlighted];
 	}
 	
+	
 	_handle.frame = UIEdgeInsetsInsetRect(CGRectMake(x - _handleShadowWidth, 0.0f, _handleWidth + _handleShadowWidth + _handleShadowWidth, height), _trackEdgeInsets);
-	_onBackgroundImageView.frame = CGRectMake(0.0f, 0.0f, width, height);
-
-	CGFloat leftCapWidth = _leftHandleImage.leftCapWidth;
-	_offBackgroundImageView.frame = CGRectMake(x + _trackEdgeInsets.left + leftCapWidth, 0.0f, width - x - _trackEdgeInsets.left - leftCapWidth, height);
+	
+	_onBackgroundImageView.frame = self.bounds;
+	_onBackgroundImageView.layer.mask.frame = (CGRect){ (CGPoint){ 0, 0 }, (CGSize){ clippingPoint, height } };
+	
+	_offBackgroundImageView.frame = self.bounds;
+	_offBackgroundImageView.layer.mask.frame = (CGRect){ (CGPoint){ clippingPoint, 0 }, (CGSize){ width - clippingPoint, height } };
 	
 	// TODO: These are still a bit hacky (with the +2 and -1)
 	_onLabel.frame = CGRectMake(x - labelWidth - _trackEdgeInsets.left - labelClipWidth + 2.0f, 0.0f, labelWidth, labelHeight);
-	_offLabel.frame = CGRectMake(x + _handleWidth - _trackEdgeInsets.right - labelClipWidth - 1.0f, 0.0f, labelWidth, labelHeight);
+	_onLabel.hidden = !!_onView;
 	
+	_offLabel.frame = CGRectMake(x + _handleWidth - _trackEdgeInsets.right - labelClipWidth - 1.0f, 0.0f, labelWidth, labelHeight);
+	_offLabel.hidden = !!_offView;
+
 	if (_onView) {
 	
 		[_labelMaskView addSubview:_onView];
+		
 		_onView.frame = (CGRect){
 			(CGPoint){
 				roundf(_onLabel.frame.origin.x + 0.5f * (_onLabel.frame.size.width - _onView.frame.size.width)), 
@@ -278,13 +297,13 @@
 			},
 			_onView.frame.size
 		};
-		_onLabel.hidden = YES;
-
+		
 	}
-
+	
 	if (_offView) {
 
 		[_labelMaskView addSubview:_offView];
+		
 		_offView.frame = (CGRect){
 			(CGPoint){
 				roundf(_offLabel.frame.origin.x + 0.5f * (_offLabel.frame.size.width - _offView.frame.size.width)), 
@@ -292,7 +311,6 @@
 			},
 			_offView.frame.size
 		};
-		_offLabel.hidden = YES;
 		
 	}
 	
@@ -325,7 +343,12 @@
 	}
 	
 	_dragging = YES;
+	
+	[CATransaction begin];
+	[CATransaction setDisableActions:YES];
 	[self _layoutSubviewsWithHandlePosition:[touch locationInView:self].x - _dragOffset];
+	[CATransaction commit];
+	
 }
 
 
